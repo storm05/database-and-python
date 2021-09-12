@@ -1,0 +1,41 @@
+import mysql.connector
+
+mydb=mysql.connector.connect(
+    host="localhost",
+    user="yourusername",
+    password="yourpassword",
+    database="database_name"
+)
+
+print("**********************Hey Alien, do you want to play a game????********************** ")
+res = input("if 'YES' then press 'Y' and if you don't want to play then you can press 'N'.").upper()
+if(res == 'Y'):
+    print("Welcome in quiz world.")
+    name=input("Enter your good name please :-")
+    print("Hello ",name," I am kitty.We are going to start quiz soon so I want to tell you about quiz first.")
+    print("      We will ask you 2 simple questions and for one right answer you will get 5 points.")
+    count = 0
+    print("What is the capital of India.")
+    q1=int(input("1) Delhi      2)Mumbai        3)Pune      4Ranchi"))
+    if(q1==1):
+        count+=5
+    else:
+        print("Ohooo, Wrong answer.")
+    print("What is the capital of M.P.")
+    q2 = int(input("1) Indore     2)Bhopal        3)Jabalpur      4Gwalior"))
+    if (q2 == 2):
+        count += 5
+    else:
+        print("Ohooo, Wrong answer.")
+
+    mycursor = mydb.cursor()
+
+    sql = "INSERT INTO customers (name, points) VALUES (%s, %s)"
+    val = (name, count)
+
+    mycursor.execute(sql, val)
+
+    mydb.commit()
+    print(name,"- ",count)
+else:
+    print("I think you are not intrested.....no problem bye bye Alien")
